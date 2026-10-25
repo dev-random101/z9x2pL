@@ -6,7 +6,10 @@ import {
 import { Calendar, Clock, AlertTriangle, Info, Activity, TrendingDown, TrendingUp } from 'lucide-react';
 
 // --- Types ---
+const API_BASE_URL = "https://z9x2pL.onrender.com";
+
 interface DataPoint {
+
   startTime: string;
   generation: number;
 }
@@ -86,11 +89,11 @@ const App = () => {
       const cParam = mode === 'cutoff' ? `&cutoff_hour=${cutoffHour}` : '';
 
       const [resAct, resFc, resMet, resHour, resHoriz] = await Promise.all([
-        fetch(`/api/actuals?start=${startDate}&end=${endDate}`).then(r => r.json()),
-        fetch(`/api/forecast?start=${startDate}&end=${endDate}${cParam}${hParam}`).then(r => r.json()),
-        fetch(`/api/metrics?start=${startDate}&end=${endDate}${cParam}${hParam}`).then(r => r.json()),
-        fetch(`/api/metrics/by-hour?start=${startDate}&end=${endDate}${cParam}${hParam}`).then(r => r.json()),
-        fetch(`/api/metrics/by-horizon?start=${startDate}&end=${endDate}`).then(r => r.json()),
+        fetch(`${API_BASE_URL}/api/actuals?start=${startDate}&end=${endDate}`).then(r => r.json()),
+        fetch(`${API_BASE_URL}/api/forecast?start=${startDate}&end=${endDate}${cParam}${hParam}`).then(r => r.json()),
+        fetch(`${API_BASE_URL}/api/metrics?start=${startDate}&end=${endDate}${cParam}${hParam}`).then(r => r.json()),
+        fetch(`${API_BASE_URL}/api/metrics/by-hour?start=${startDate}&end=${endDate}${cParam}${hParam}`).then(r => r.json()),
+        fetch(`${API_BASE_URL}/api/metrics/by-horizon?start=${startDate}&end=${endDate}`).then(r => r.json()),
       ]);
 
       setActuals(resAct);
